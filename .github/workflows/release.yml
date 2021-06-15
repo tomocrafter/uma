@@ -49,9 +49,15 @@ jobs:
         rm -f ~/.gradle/caches/modules-2/modules-2.lock
         rm -f ~/.gradle/caches/modules-2/gc.properties
 
+    - name: Zip artifact with uma list and default settings
+      uses: papeloto/action-zip@v1
+      with:
+        files: ./build/libs/uma-1.0-SNAPSHOT.jar uma_list.txt selected.properties
+        dest: uma.zip
+
     - name: Create a Release
       id: create-release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "./build/libs/uma-1.0-SNAPSHOT.jar"
+        artifacts: uma.zip
         token: ${{ secrets.GITHUB_TOKEN }}
