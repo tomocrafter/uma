@@ -4,8 +4,19 @@ on:
   push:
     tags:
       - '*'
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
+  validation:
+    name: Validate Gradle Wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
   build:
     runs-on: ubuntu-latest
 
